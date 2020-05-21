@@ -6,9 +6,8 @@
 Get-WmiObject win32_logicaldisk | Select-Object DeviceID, @{name="Total Size(GB)";expression={$_.Size / 1GB -as [int]}}, @{name="FreeSpace(GB)";expression={$_.FreeSpace / 1GB -as [int]}}
 ```
 
-#### Get the running Service
+#### Figure out who rebooted the server
 
 ```powershell
-Get-Service
-Get-Process
+Get-EventLog -LogName System  | Where-Object {$_.Message -like "*restart*" } | select timewritten, Message | ft -Wrap
 ```
