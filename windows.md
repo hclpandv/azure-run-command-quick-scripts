@@ -3,11 +3,13 @@
 #### Get Free Disk Space
 
 ```powershell
+([System.Net.Dns]::GetHostByName(($env:computerName))).hostname
 Get-WmiObject win32_logicaldisk | Select-Object DeviceID, @{name="Total Size(GB)";expression={$_.Size / 1GB -as [int]}}, @{name="FreeSpace(GB)";expression={$_.FreeSpace / 1GB -as [int]}}
 ```
 
 #### Figure out who rebooted the server
 
 ```powershell
+([System.Net.Dns]::GetHostByName(($env:computerName))).hostname
 Get-EventLog -LogName System  | Where-Object {$_.Message -like "*restart*" } | select timewritten, Message | ft -Wrap
 ```
