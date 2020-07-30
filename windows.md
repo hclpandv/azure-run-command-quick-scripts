@@ -3,6 +3,7 @@
 ### Get FQDN
 
 ```powershell
+echo "hostname: $(([System.Net.Dns]::GetHostByName(($env:computerName))).hostname)"
 ([System.Net.Dns]::GetHostByName(($env:computerName))).hostname
 ```
 
