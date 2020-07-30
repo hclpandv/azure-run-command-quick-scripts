@@ -19,6 +19,12 @@ Get-WmiObject win32_logicaldisk | Select-Object DeviceID, @{name="Total Size(GB)
 Get-WmiObject Win32_OperatingSystem | select @{n="Total Memory(MB)";e={$_.TotalVisibleMemorySize / 1Mb}}, @{n='Free Memory(MB)';e={$_.FreePhysicalMemory / 1MB}}
 ```
 
+### Top 5 memory consuming processes
+
+```powershell
+Get-Process | Sort-Object -Descending WS | select ProcessName, WS, ID, CPU -First 5 | ft -AutoSize -wrap
+```
+
 #### Figure out who rebooted the server
 
 ```powershell
