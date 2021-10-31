@@ -30,3 +30,8 @@ Get-Process | Sort-Object -Descending WS | select ProcessName, WS, ID, CPU -Firs
 ```powershell
 Get-EventLog -LogName System  | Where-Object {$_.Message -like "*restart*" } | select timewritten, Message | ft -Wrap
 ```
+#### Figure out who rebooted the server
+
+```powershell
+(get-date) - (gcim Win32_OperatingSystem).LastBootUpTime
+```
